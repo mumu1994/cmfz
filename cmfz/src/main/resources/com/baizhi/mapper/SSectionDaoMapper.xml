@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.SSectionDao">
+
+
+    <!--public void insert(Section section);-->
+
+    <insert id="insert" parameterType="SSection">
+        insert into ssection(id,title,ssize,duration,downPath,uploadDate,status,aid)
+        VALUES (#{id},#{title},#{ssize},#{duration},#{downPath},#{uploadDate},#{status},#{aid})
+
+    </insert>
+
+
+     <!--    public List<Section> findAll();-->
+    <select id="findAll" resultType="SSection">
+        select id,title,ssize,duration,downPath,uploadDate,status,aid
+        from ssection
+
+    </select>
+
+   <!-- public Section findOne(String id);-->
+
+    <select id="findOne" parameterType="String" resultType="SSection">
+        select id,title,ssize,duration,downPath,uploadDate,status,aid
+        from ssection
+        WHERE id = #{id}
+
+    </select>
+
+   <!-- public void update(Section section);-->
+    <update id="update" parameterType="SSection">
+        update ssection set status = #{status} WHERE id = #{id}
+    </update>
+
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

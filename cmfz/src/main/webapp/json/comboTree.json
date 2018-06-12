@@ -1,0 +1,35 @@
+[
+  {
+    "id":"customer",
+    "text":"请选择",
+    "iconCls":"icon-add",
+    "state":"open",
+    "children":[
+      {
+        "text":"编号",
+        "id":"id"
+      },
+      {
+        "text":"图片名称",
+        "id":"title"
+      },
+      {
+        "text":"图片路径",
+        "id":"imgPath"
+      },
+      {
+        "text":"描述",
+        "id":"pdesc"
+      },
+      {
+        "text":"状态",
+        "id":"status"
+      },
+      {
+        "text":"上传日期",
+        "id":"pdate"
+      }
+    ]
+
+  }
+]

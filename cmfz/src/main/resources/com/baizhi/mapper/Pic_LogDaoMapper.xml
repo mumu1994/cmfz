@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.Pic_LogDao">
+
+
+    <!--  public void insert(Pic_Log pic_log); -->
+    <insert id="insert" parameterType="Pic_Log" flushCache="true">
+        <selectKey keyProperty="id" resultType="Integer" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+        insert into pic_log(t_name,t_thing,t_time,t_result)
+        values(#{t_name},#{t_thing},#{t_time},#{t_result})
+    </insert>
+
+    <!--public List<Pic_Log> queryAll();-->
+    <select id="queryAll" resultType="Pic_Log">
+        SELECT id,t_name,t_thing,t_time,t_result
+        FROM pic_log
+    </select>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

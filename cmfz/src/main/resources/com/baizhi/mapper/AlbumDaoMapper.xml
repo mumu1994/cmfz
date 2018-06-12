@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.AlbumDao">
+
+
+    <!--public void insert(Album album);-->
+    <insert id="insert" parameterType="Album">
+        insert into album(id,title,coverImg,acount,score,author,broadCast,brief,publishDate,status)
+        VALUES (#{id},#{title},#{coverImg},#{acount},#{score},#{author},#{broadCast},#{brief},#{publishDate},#{status})
+
+    </insert>
+
+
+    <!--public List<Album> findAll();-->
+    <resultMap id="all" type="Album">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="coverImg" property="coverImg"/>
+        <result column="acount" property="acount"/>
+        <result column="score" property="score"/>
+        <result column="author" property="author"/>
+        <result column="broadCast" property="broadCast"/>
+        <result column="brief" property="brief"/>
+        <result column="publishDate" property="publishDate"/>
+        <result column="status" property="status"/>
+    <collection property="children" ofType="SSection">
+        <id column="sid" property="id"/>
+        <result column="stitle" property="title"/>
+        <result column="sssize" property="ssize"/>
+        <result column="sduration" property="duration"/>
+        <result column="sdownPath" property="downPath"/>
+        <result column="suploadDate" property="uploadDate"/>
+        <result column="sstatus" property="status"/>
+        <result column="said" property="aid"/>
+    </collection>
+</resultMap>
+
+
+    <select id="findAll" resultMap="all">
+       select a.id, a.title,a.coverImg,a.acount,a.score,a.author,a.broadCast,a.brief,a.publishDate,a.status,
+                s.id sid,s.title stitle,s.ssize sssize,s.duration sduration,s.downPath sdownPath,s.uploadDate  suploadPath,s.status sstatus,s.aid said
+        from album a left JOIN ssection s
+        on a.id = s.aid
+
+
+    </select>
+
+    <!--public Album findOne(String id);-->
+
+    <resultMap id="one" type="Album">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="coverImg" property="coverImg"/>
+        <result column="acount" property="acount"/>
+        <result column="score" property="score"/>
+        <result column="author" property="author"/>
+        <result column="broadCast" property="broadCast"/>
+        <result column="brief" property="brief"/>
+        <result column="publishDate" property="publishDate"/>
+        <result column="status" property="status"/>
+        <collection property="children" ofType="SSection">
+            <id column="sid" property="id"/>
+            <result column="stitle" property="title"/>
+            <result column="sssize" property="ssize"/>
+            <result column="sduration" property="duration"/>
+            <result column="sdownPath" property="downPath"/>
+            <result column="suploadDate" property="uploadDate"/>
+            <result column="sstatus" property="status"/>
+            <result column="said" property="aid"/>
+        </collection>
+    </resultMap>
+    <select id="findOne" resultMap="one">
+            select a.id, a.title,a.coverImg,a.acount,a.score,a.author,a.broadCast,a.brief,a.publishDate,a.status,
+                s.id sid,s.title stitle,s.ssize sssize,s.duration sduration,s.downPath sdownPath,s.uploadDate  suploadPath,s.status sstatus,s.aid said
+        from album a left JOIN ssection s
+        on a.id = s.aid
+        where a.id = #{id}
+
+    </select>
+
+
+    <!--public Album findAlbum(String id);-->
+    <select id="findAlbum" resultType="Album">
+        select id, title,coverImg,acount,score,author,broadCast,brief,publishDate,status
+        from album
+        where id = #{id}
+
+    </select>
+
+   <!-- public void update(Album album);-->
+    <update id="update" parameterType="Album">
+        update album set status = #{status} WHERE id = #{id}
+    </update>
+
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.PictureDao">
+
+
+    <!-- public void insert(Picture picture); -->
+    <insert id="insert" parameterType="Picture" flushCache="true">
+        <selectKey keyProperty="id" resultType="Integer" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+        insert into picture(title,imgPath,pdesc,status,pdate)
+        values(#{title},#{imgPath},#{pdesc},#{status},#{pdate})
+    </insert>
+
+     <!--public void delete(Integer id);-->
+    <delete id="delete" parameterType="Integer">
+        delete from picture WHERE id = #{id}
+    </delete>
+
+    <!-- public void update(Picture picture); -->
+    <update id="update" parameterType="Picture">
+        <![CDATA[
+        update picture set status=#{status},pdate=#{pdate}
+        where id=#{id}
+    ]]>
+    </update>
+
+    <!-- public List<Picture> findAll(); -->
+    <select id="findAll" resultType="Picture" flushCache="true">
+        select id,title,imgPath,pdesc,status,pdate from picture
+    </select>
+
+    <!-- public Picture findOne(Integer id); -->
+    <select id="findOne" resultType="Picture" parameterType="Integer" flushCache="true">
+        select id,title,imgPath,pdesc,status,pdate
+        from picture
+        where id=#{id}
+    </select>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

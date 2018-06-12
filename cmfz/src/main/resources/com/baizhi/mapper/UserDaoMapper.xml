@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.UserDao">
+
+
+    <!--public Integer findFirst();-->
+
+     <select id="findFirst" resultType="Integer">
+     <![CDATA[
+        SELECT COUNT(*)    from uuser
+        WHERE DATEDIFF(NOW(),udate)<=7;
+      ]]>
+    </select>
+
+
+
+
+    <!--public Integer findSecond();-->
+    <select id="findSecond" resultType="Integer">
+    <![CDATA[
+        SELECT COUNT(*)    from uuser
+        WHERE DATEDIFF(NOW(),udate)>7 and DATEDIFF(NOW(),udate)<=14;
+      ]]>
+    </select>
+
+    <!--public Integer findthird();-->
+    <select id="findthird" resultType="Integer">
+       <![CDATA[
+        SELECT COUNT(*)    from uuser
+        WHERE DATEDIFF(NOW(),udate)>14 and DATEDIFF(NOW(),udate)<=21;
+      ]]>
+    </select>
+
+    <!--public Integer findforth();-->
+    <select id="findforth" resultType="Integer">
+      <![CDATA[
+        SELECT COUNT(*)    from uuser
+        WHERE DATEDIFF(NOW(),udate)>21 and DATEDIFF(NOW(),udate)<=28;
+      ]]>
+
+    </select>
+
+
+   <!-- public void update(String id,String status);-->
+    <update id="update" parameterType="String">
+        update uuser set status = #{staus} WHERE id = #{id}
+
+    </update>
+
+
+    <select id="queryByProvicM" resultType="Province">
+        select province,count(*) nnum
+        from uuser
+        WHERE sex='男'
+        group by province
+
+
+    </select>
+
+    <select id="queryByProvicF" resultType="Province">
+        select province,count(*) num
+        from uuser
+         WHERE sex='女'
+        group by province
+
+
+    </select>
+
+    <!--public User findOne(String phone);-->
+    <select id="findOne" resultType="User" parameterType="String">
+        select id,phoneNum,username,password,salt,dharmaName,province,city,sex,sign,headPic,status,udate
+        FROM uuser
+        WHERE phoneNum=#{phoneNum}
+
+    </select>
+
+    <!--public User queryById(String id);-->
+
+    <select id="queryById" resultType="User" parameterType="String">
+        select id,phoneNum,username,password,salt,dharmaName,province,city,sex,sign,headPic,status,udate
+        FROM uuser
+        WHERE id=#{id}
+
+    </select>
+
+   <!-- public void insert(User user);-->
+    <insert id="insert" parameterType="User" >
+        insert into uuser(phoneNum,password,id)
+        values(#{phoneNum},#{password},#{id})
+
+    </insert>
+
+
+    <update id="updateMore" parameterType="User">
+        UPDATE uuser
+        <set>
+            <if test="sex!=null">sex=#{sex},</if>
+            <if test="headPic!=null">headPic=#{headPic},</if>
+            <if test="city!=null">city=#{city},</if>
+            <if test="sign!=null">sign=#{sign},</if>
+            <if test="username!=null">username=#{username},</if>
+            <if test="province!=null">province=#{province},</if>
+            <if test="password!=null">password=#{password},</if>
+        </set>
+        where id=#{id}
+    </update>
+
+
+    <!--public List<User> findAll();-->
+
+    <select id="findAll" resultType="User" >
+        select id,phoneNum,username,password,salt,dharmaName,province,city,sex,sign,headPic,status,udate
+        FROM uuser
+
+
+    </select>
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
